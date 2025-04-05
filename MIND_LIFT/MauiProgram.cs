@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MIND_LIFT.View;
 
 namespace MIND_LIFT
 {
@@ -19,6 +20,8 @@ namespace MIND_LIFT
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
+            builder.Services.AddSingleton<LoginPage>();
+
 #endif
 
             return builder.Build();

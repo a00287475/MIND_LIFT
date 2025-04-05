@@ -1,15 +1,17 @@
-﻿namespace MIND_LIFT
+﻿using System.Xml.Serialization;
+using MIND_LIFT.View;
+
+namespace MIND_LIFT
 {
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
+
+            MainPage = new NavigationPage(new LoginPage());
         }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new MainPage()) { Title = "MIND_LIFT" };
-        }
+      
     }
 }
