@@ -12,6 +12,6 @@ namespace MIND_LIFT
             MainPage = new NavigationPage(new LoginPage());
         }
 
-      
+
     }
 }
