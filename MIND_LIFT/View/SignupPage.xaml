@@ -4,6 +4,8 @@
              xmlns:vm="clr-namespace:MIND_LIFT.ViewModel"
              x:Class="MIND_LIFT.View.SignupPage"
              x:DataType="vm:SignupViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
              Title="SignupPage">
     
     <ContentPage.BindingContext>
@@ -17,10 +19,15 @@
                FontAttributes="Bold"
                HorizontalOptions="Center" />
 
-        <!-- Full Name -->
-        <Entry Placeholder="Full Name"
-               Text="{Binding FullName}"
+        <!-- First Name -->
+        <Entry Placeholder="Fist Name"
+               Text="{Binding FirstName}"
                ClearButtonVisibility="WhileEditing" />
+
+        <!-- Last Name -->
+        <Entry Placeholder="Last Name"
+                Text="{Binding LastName}"
+                ClearButtonVisibility="WhileEditing" />
 
         <!-- Email -->
         <Entry Placeholder="Email"
@@ -38,12 +45,6 @@
         <Entry Placeholder="Confirm Password"
                Text="{Binding ConfirmPassword}"
                IsPassword="True"
-               ClearButtonVisibility="WhileEditing" />
-
-        <!-- Phone (Optional) -->
-        <Entry Placeholder="Phone (Optional)"
-               Text="{Binding Phone}"
-               Keyboard="Telephone"
                ClearButtonVisibility="WhileEditing" />
 
         <!-- Signup Button -->
