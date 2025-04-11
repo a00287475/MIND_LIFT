@@ -5,6 +5,10 @@
              x:Class="MIND_LIFT.View.LoginPage"
              x:DataType="vm:LoginViewModel">
 
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout Padding="30" Spacing="15">
         <Label Text="Welcome to MindLift"
                FontSize="24"

@@ -1,4 +1,4 @@
-using MIND_LIFT.ViewModels;
+using MIND_LIFT.ViewModel;
 
 namespace MIND_LIFT.View;
 

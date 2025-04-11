@@ -9,37 +9,36 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 
-namespace MIND_LIFT.ViewModels
+namespace MIND_LIFT.ViewModel;
+
+public partial class DashboardViewModel : ObservableObject
 {
-    public partial class DashboardViewModel : ObservableObject
+    [ObservableProperty]
+    private Affirmation dailyAffirmation;
+
+    public DashboardViewModel()
     {
-        [ObservableProperty]
-        private Affirmation dailyAffirmation;
-
-        public DashboardViewModel()
+        DailyAffirmation = new Affirmation
         {
-            DailyAffirmation = new Affirmation
-            {
-                Message = "You are strong, capable, and resilient."
-            };
-        }
+            Message = "You are strong, capable, and resilient."
+        };
+    }
 
-        [RelayCommand]
-        private async Task NavigateToMoodLog()
-        {
-            await Shell.Current.GoToAsync("MoodLogPage");
-        }
+    [RelayCommand]
+    private async Task NavigateToMoodLog()
+    {
+        await Shell.Current.GoToAsync("MoodLogPage");
+    }
 
-        [RelayCommand]
-        private async Task NavigateToMeditation()
-        {
-            await Shell.Current.GoToAsync("MeditationPage");
-        }
+    [RelayCommand]
+    private async Task NavigateToMeditation()
+    {
+        await Shell.Current.GoToAsync("MeditationPage");
+    }
 
-        [RelayCommand]
-        private async Task NavigateToJournal()
-        {
-            await Shell.Current.GoToAsync("JournalPage");
-        }
+    [RelayCommand]
+    private async Task NavigateToJournal()
+    {
+        await Shell.Current.GoToAsync("JournalPage");
     }
 }
