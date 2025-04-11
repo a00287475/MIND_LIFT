@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MIND_LIFT.View;
 
 namespace MIND_LIFT.ViewModel;
 
@@ -40,6 +41,12 @@ public partial class LoginViewModel : ObservableObject
         {
             await Application.Current.MainPage.DisplayAlert("Login Failed", "Invalid email or password", "OK");
         }
+    }
+
+    [RelayCommand]
+    private async Task GoToSignUp()
+    {
+        await Shell.Current.GoToAsync("//SignupPage");
     }
 }
 

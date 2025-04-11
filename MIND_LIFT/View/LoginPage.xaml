@@ -27,5 +27,24 @@
 
         <Button Text="Login"
                 Command="{Binding LoginCommand}" />
+
+        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+
+            <Label Text="Don't have an account?" 
+           FontSize="14" 
+           VerticalTextAlignment="Center" />
+
+        <Button Text="Signup" 
+            Command="{Binding GoToSignUpCommand}" 
+            FontSize="14" 
+            BackgroundColor="Transparent" 
+            TextColor="Blue" 
+            Padding="0,-5" />
+
+
+
+        </HorizontalStackLayout>
+
+
     </VerticalStackLayout>
 </ContentPage>
