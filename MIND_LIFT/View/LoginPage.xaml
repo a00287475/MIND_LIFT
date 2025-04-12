@@ -16,6 +16,13 @@
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center" />
+        
+        <Image Source="mindlift.png"
+                 Aspect="AspectFit"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 WidthRequest="300"
+                   HeightRequest="300" />
 
         <Entry Placeholder="Email"
                Text="{Binding Email}"
