@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "281567509706",
+    "project_id": "mindlift-1f06a",
+    "storage_bucket": "mindlift-1f06a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281567509706:android:5f75e39c21245e72228833",
+        "android_client_info": {
+          "package_name": "com.mycompany.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiR3Tm4xJ1FJTzksFWAasjlYRpaRCbLR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
