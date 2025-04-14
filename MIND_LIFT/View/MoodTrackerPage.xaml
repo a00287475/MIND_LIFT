@@ -2,11 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MIND_LIFT.View.MoodTrackerPage"
-             Title="MoodTrackerPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Mood Tracker">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Label Text="On a Scale of 1 to 10 how are you feeling today?" 
+                   FontSize="18" FontAttributes="Bold"/>
+
+            <!-- Mood scale 1-10 -->
+            <FlexLayout Wrap="Wrap" JustifyContent="SpaceAround">
+                <!-- Add 10 buttons here -->
+                <Button Text="1" WidthRequest="50" HeightRequest="50" CornerRadius="25"/>
+                <Button Text="2" WidthRequest="50" HeightRequest="50" CornerRadius="25"/>
+                <!-- ... up to 10 -->
+            </FlexLayout>
+
+            <Label Text="What emotions are you experiencing today?" 
+                   FontSize="18" FontAttributes="Bold"/>
+
+            <!-- Emotion selection -->
+            <FlexLayout Wrap="Wrap" JustifyContent="SpaceAround">
+                <Button Text="Happy 😊" WidthRequest="150" HeightRequest="60" CornerRadius="30"/>
+                <Button Text="Sad 😢" WidthRequest="150" HeightRequest="60" CornerRadius="30"/>
+                <!-- Add more emotions -->
+            </FlexLayout>
+
+            <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" 
+                    Command="{Binding SubmitCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
