@@ -15,6 +15,9 @@
     <!-- Your Signup page -->
     <ShellContent Title="SignupPage" ContentTemplate="{DataTemplate pages:SignupPage}" Route="SignupPage" />
 
+    <!-- Your MoodTracker page -->
+    <ShellContent Title="MoodTrackerPage" ContentTemplate="{DataTemplate pages:SignupPage}" Route="SignupPage" />
+
 
     <!-- You can add more ShellContent here -->
     <ShellContent Title="Test Page"
