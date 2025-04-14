@@ -25,9 +25,9 @@ public partial class DashboardViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task NavigateToMoodLog()
+    private async Task GotoMoodTracker()
     {
-        await Shell.Current.GoToAsync("MoodLogPage");
+        await Shell.Current.GoToAsync("MoodTrackerPage");
     }
 
     [RelayCommand]

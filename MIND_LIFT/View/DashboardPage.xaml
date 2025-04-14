@@ -13,7 +13,7 @@
 
             <Label Text="{Binding DailyAffirmation.Message}" FontSize="18" TextColor="DarkGreen"/>
 
-            <Button Text="Log Mood" Command="{Binding NavigateToMoodLogCommand}" />
+            <Button Text="Log Mood" Command="{Binding GotoMoodTrackerCommand}" />
             <Button Text="Start Meditation" Command="{Binding NavigateToMeditationCommand}" />
             <Button Text="View Journal" Command="{Binding NavigateToJournalCommand}" />
 
