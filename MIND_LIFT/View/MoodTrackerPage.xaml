@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MIND_LIFT.ViewModel"
              x:Class="MIND_LIFT.View.MoodTrackerPage"
-             
+             x:DataType="vm:MoodTrackerViewModel"
              Title="Mood Tracker">
 
     <ScrollView>
@@ -101,7 +102,7 @@
 
             <!-- Submit Button -->
             <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" BackgroundColor="Brown" TextColor="White"
-                    Command="{Binding SubmitCommand}" Margin="0,20"/>
+                    Command="{Binding SubmitMoodCommand}" Margin="0,20"/>
 
         </VerticalStackLayout>
     </ScrollView>
