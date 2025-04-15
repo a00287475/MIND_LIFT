@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MIND_LIFT"
        xmlns:pages="clr-namespace:MIND_LIFT.View"
+       FlyoutBackgroundColor="#fcd476"
        x:Class="MIND_LIFT.AppShell">
 
    
@@ -14,6 +15,9 @@
 
     <!-- Your Signup page -->
     <ShellContent Title="SignupPage" ContentTemplate="{DataTemplate pages:SignupPage}" Route="SignupPage" />
+
+    <!-- Your MoodTracker page -->
+    <ShellContent Title="MoodTrackerPage" ContentTemplate="{DataTemplate pages:MoodTrackerPage}" Route="MoodTrackerPage" />
 
 
     <!-- You can add more ShellContent here -->
