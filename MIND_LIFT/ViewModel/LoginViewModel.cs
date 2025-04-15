@@ -1,52 +1,54 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MIND_LIFT.View;
+using MIND_LIFT.Services;
 
-namespace MIND_LIFT.ViewModel;
-
-public partial class LoginViewModel : ObservableObject
+namespace MIND_LIFT.ViewModel
 {
-    [ObservableProperty]
-    private string? email;
-
-    [ObservableProperty]
-    private string? password;
-
-    [RelayCommand]
-    public async Task Login()
+    public partial class LoginViewModel : ObservableObject
     {
-        //await Application.Current.MainPage.DisplayAlert("Debug", $"Email: {Email ?? "null"}, Password: {Password ?? "null"}", "OK");    //   T Catch exceptions
+        private readonly FirebaseAuthService _authService = new();
+        private readonly FirestoreService _firestoreService = new();
 
-        if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+        [ObservableProperty]
+        private string email;
+
+        [ObservableProperty]
+        private string password;
+
+        public ICommand LoginCommand { get; }
+        public ICommand GoToSignUpCommand { get; }
+
+        public LoginViewModel()
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Email or Password is empty!", "OK");
-            return;
+            LoginCommand = new AsyncRelayCommand(LoginAsync);
+            GoToSignUpCommand = new AsyncRelayCommand(NavigateToSignup);
         }
-        if (Email == "user" && Password == "pass")
+
+        private async Task LoginAsync()
         {
-            //try
-            //{                                                                                                                          //   To Catch exceptions
-            await Shell.Current.GoToAsync("//DashboardPage");
-                
-            //}
+            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+            {
+                await Shell.Current.DisplayAlert("Error", "Email and password cannot be empty", "OK");
+                return;
+            }
 
-            //catch (Exception ex)
-            //{
-            //    // This will catch any runtime errors like misconfigured routes
-            //    await Application.Current.MainPage.DisplayAlert("Navigation Crash", ex.ToString(), "OK");                              //   To Catch exceptions
-            //}
+            try
+            {
+                string token = await _authService.LoginAsync(Email, Password);
+                await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
 
+                await _firestoreService.AddMoodEntryAsync(token, "user123", "Happy", "Had a great therapy session!");
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Login Failed", ex.Message, "OK");
+            }
         }
-        else
+
+        private async Task NavigateToSignup()
         {
-            await Application.Current.MainPage.DisplayAlert("Login Failed", "Invalid email or password", "OK");
+            await Shell.Current.GoToAsync("//SignUpPage"); // Adjust route if needed
         }
-    }
-
-    [RelayCommand]
-    private async Task GoToSignUp()
-    {
-        await Shell.Current.GoToAsync("//SignupPage");
     }
 }
-
