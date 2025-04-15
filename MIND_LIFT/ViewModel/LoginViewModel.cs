@@ -23,7 +23,7 @@ namespace MIND_LIFT.ViewModel
         {
             LoginCommand = new AsyncRelayCommand(LoginAsync);
             GoToSignUpCommand = new AsyncRelayCommand(NavigateToSignup);
-        }
+        }v
 
         private async Task LoginAsync()
         {
@@ -37,6 +37,7 @@ namespace MIND_LIFT.ViewModel
             {
                 //string token = await _authService.LoginAsync(Email, Password);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
+                await Shell.Current.GoToAsync("//DashboardPage");
 
                 //await _firestoreService.AddMoodEntryAsync(token, "user123", "Happy", "Had a great therapy session!");
             }
