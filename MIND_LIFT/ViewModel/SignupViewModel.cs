@@ -50,9 +50,12 @@ public partial class SignupViewModel : ObservableObject
 
         try
         {
+            // Register the user with Firebase
             string token = await _authService.RegisterAsync(Email, Password);
+
+            // After successful signup, navigate to LoginPage
             await ShowAlert("Success", "Account created! You can now log in.");
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("//LoginPage"); // Use the correct route name
         }
         catch (Exception ex)
         {
@@ -65,6 +68,7 @@ public partial class SignupViewModel : ObservableObject
     [RelayCommand]
     private async Task GoToLoginAsync()
     {
+        // Ensure we navigate to the correct page route
         await Shell.Current.GoToAsync("//LoginPage");
     }
 
