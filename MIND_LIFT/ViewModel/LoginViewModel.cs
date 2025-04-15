@@ -35,10 +35,10 @@ namespace MIND_LIFT.ViewModel
 
             try
             {
-                string token = await _authService.LoginAsync(Email, Password);
+                //string token = await _authService.LoginAsync(Email, Password);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
 
-                await _firestoreService.AddMoodEntryAsync(token, "user123", "Happy", "Had a great therapy session!");
+                //await _firestoreService.AddMoodEntryAsync(token, "user123", "Happy", "Had a great therapy session!");
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace MIND_LIFT.ViewModel
 
         private async Task NavigateToSignup()
         {
-            await Shell.Current.GoToAsync("//SignupPage"); // Adjust route if needed
+            await Shell.Current.GoToAsync("//SignpPage"); // Adjust route if needed
         }
     }
 }
