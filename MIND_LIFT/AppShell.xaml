@@ -3,7 +3,10 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MIND_LIFT"
        xmlns:pages="clr-namespace:MIND_LIFT.View"
-       FlyoutBackgroundColor="#fcd476"
+       FlyoutBackgroundColor="#B2EBF2"
+       BackgroundColor="#fcd476"
+       TitleColor="Black"
+       ForegroundColor="Black"
        x:Class="MIND_LIFT.AppShell">
 
    
