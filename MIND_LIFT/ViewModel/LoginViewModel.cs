@@ -48,7 +48,7 @@ namespace MIND_LIFT.ViewModel
 
         private async Task NavigateToSignup()
         {
-            await Shell.Current.GoToAsync("//SignUpPage"); // Adjust route if needed
+            await Shell.Current.GoToAsync("//SignupPage"); // Adjust route if needed
         }
     }
 }

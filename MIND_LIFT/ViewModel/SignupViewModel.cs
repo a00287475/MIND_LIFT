@@ -32,7 +32,7 @@ public partial class SignupViewModel : ObservableObject
 
     // 🟢 Sign Up Command (linked in XAML to Button)
     [RelayCommand]
-    private async Task SignUpAsync()
+    private async Task SignupAsync()
     {
         if (string.IsNullOrWhiteSpace(Email) ||
             string.IsNullOrWhiteSpace(Password) ||
@@ -55,7 +55,7 @@ public partial class SignupViewModel : ObservableObject
 
             // After successful signup, navigate to LoginPage
             await ShowAlert("Success", "Account created! You can now log in.");
-            await Shell.Current.GoToAsync("//LoginPage"); // Use the correct route name
+            await Shell.Current.GoToAsync("LoginPage"); // Use the correct route name
         }
         catch (Exception ex)
         {
@@ -69,7 +69,7 @@ public partial class SignupViewModel : ObservableObject
     private async Task GoToLoginAsync()
     {
         // Ensure we navigate to the correct page route
-        await Shell.Current.GoToAsync("//LoginPage");
+        await Shell.Current.GoToAsync("LoginPage");
     }
 
     // 🛎️ Helper to show alerts
