@@ -23,7 +23,7 @@ namespace MIND_LIFT.ViewModel
         {
             LoginCommand = new AsyncRelayCommand(LoginAsync);
             GoToSignUpCommand = new AsyncRelayCommand(NavigateToSignup);
-        }v
+        }
 
         private async Task LoginAsync()
         {
