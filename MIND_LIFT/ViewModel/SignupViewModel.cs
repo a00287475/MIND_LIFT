@@ -32,7 +32,7 @@ public partial class SignupViewModel : ObservableObject
 
     // 🟢 Sign Up Command (linked in XAML to Button)
     [RelayCommand]
-    private async Task SignupAsync()
+    private async Task SignUpAsync()
     {
         if (string.IsNullOrWhiteSpace(Email) ||
             string.IsNullOrWhiteSpace(Password) ||
