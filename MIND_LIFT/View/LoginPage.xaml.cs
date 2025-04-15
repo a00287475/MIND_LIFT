@@ -13,6 +13,14 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
         BindingContext = new LoginViewModel();
 
+
+
+
+
+        // This is just a test comment to demo commits soigdfjhguguid
+
+
+
         // Check if AuthenticationService is initialized
         if (authService == null)
         {
