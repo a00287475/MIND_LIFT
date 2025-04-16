@@ -3,16 +3,30 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MIND_LIFT"
        xmlns:pages="clr-namespace:MIND_LIFT.View"
+       FlyoutBackgroundColor="#B2EBF2"
+       BackgroundColor="#fcd476"
+       TitleColor="Black"
+       ForegroundColor="Black"
        x:Class="MIND_LIFT.AppShell">
 
-    <!-- Your dashboard page -->
-    <ShellContent Title="Dashboard"
-                  ContentTemplate="{DataTemplate pages:DashboardPage}"
-                  Route="DashboardPage" />
+   
     <!-- Your login page -->
-    <ShellContent Title="Login" ContentTemplate="{DataTemplate pages:LoginPage}" />
-    <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate pages:DashboardPage}" Route="DashboardPage" />
-    
+    <ShellContent Title="LoginPage" ContentTemplate="{DataTemplate pages:LoginPage}" Route="LoginPage" />
+
+    <!-- Your dashboard page -->
+    <ShellContent Title="DashboardPage" ContentTemplate="{DataTemplate pages:DashboardPage}" Route="DashboardPage" />
+
+    <!-- Your Signup page -->
+    <ShellContent Title="SignupPage" ContentTemplate="{DataTemplate pages:SignupPage}" Route="SignupPage" />
+
+    <!-- Your MoodTracker page -->
+    <ShellContent Title="MoodTrackerPage" ContentTemplate="{DataTemplate pages:MoodTrackerPage}" Route="MoodTrackerPage" />
+
 
     <!-- You can add more ShellContent here -->
+    <ShellContent Title="Test Page"
+              ContentTemplate="{DataTemplate pages:TestPage}" 
+              Route="TestPage" />
+ 
+
 </Shell>
