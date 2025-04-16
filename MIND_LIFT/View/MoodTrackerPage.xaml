@@ -100,7 +100,7 @@
             </Grid>
 
             <!-- Submit Button -->
-            <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" BackgroundColor="White" TextColor="Black"
+            <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" BackgroundColor="Brown" TextColor="White"
                     Command="{Binding SubmitCommand}" Margin="0,20"/>
 
         </VerticalStackLayout>
