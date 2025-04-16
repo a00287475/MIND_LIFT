@@ -26,6 +26,7 @@ namespace MIND_LIFT.ViewModel
 
             try
             {
+                await _authService.SignInWithEmailAndPasswordAsync(Email, Password);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
                 await Shell.Current.GoToAsync("//DashboardPage");
             }

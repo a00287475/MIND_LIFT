@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MIND_LIFT.ViewModel"
              x:Class="MIND_LIFT.View.MoodTrackerPage"
-             
+             x:DataType="vm:MoodTrackerViewModel"
              Title="Mood Tracker">
 
     <ScrollView>
@@ -52,56 +53,56 @@
             <Grid ColumnDefinitions="*,*,*" RowDefinitions="auto,auto,auto,auto,auto,auto" ColumnSpacing="10" RowSpacing="10">
                 <!-- Row 1 -->
                 <Button Text="Relaxed 🌿" Grid.Row="0" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Relaxed 🌿"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Relaxed 🌿"/>
                 <Button Text="Sad 😢" Grid.Row="0" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Sad 😢"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Sad 😢"/>
                 <Button Text="Anxious 😟" Grid.Row="0" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Anxious 😟"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Anxious 😟"/>
 
                 <!-- Row 2 -->
                 <Button Text="Tired 😴" Grid.Row="1" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0"  TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Tired 😴"/>
+                        BackgroundColor="#DAA520"  TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Tired 😴"/>
                 <Button Text="Motivated 🚀" Grid.Row="1" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Motivated 🚀"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Motivated 🚀"/>
                 <Button Text="Meh 😐" Grid.Row="1" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Meh 😐"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Meh 😐"/>
 
                 <!-- Row 3 -->
                 <Button Text="Loved ❤️" Grid.Row="2" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Loved ❤️"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Loved ❤️"/>
                 <Button Text="Bored 😑" Grid.Row="2" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Bored 😑"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Bored 😑"/>
                 <Button Text="Calm 😌" Grid.Row="2" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Calm 😌"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Calm 😌"/>
 
                 <!-- Row 4 -->
                 <Button Text="Excited 🤩" Grid.Row="3" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Excited 🤩"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Excited 🤩"/>
                 <Button Text="Grateful 🙏" Grid.Row="3" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Grateful 🙏"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Grateful 🙏"/>
                 <Button Text="Confident 💪" Grid.Row="3" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Confident 💪"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Confident 💪"/>
 
                 <!-- Row 5 -->
                 <Button Text="Stressed 😰" Grid.Row="4" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Stressed 😰"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Stressed 😰"/>
                 <Button Text="Happy 😊" Grid.Row="4" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Happy 😊"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Happy 😊"/>
                 <Button Text="Angry 😡" Grid.Row="4" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Angry 😡"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Angry 😡"/>
 
                 <!-- Row 6 -->
                 <Button Text="Frustrated 😖" Grid.Row="5" Grid.Column="0" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Frustrated 😖"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Frustrated 😖"/>
                 <Button Text="Lonely 🥺" Grid.Row="5" Grid.Column="1" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Lonely 🥺"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Lonely 🥺"/>
                 <Button Text="Fried 😵" Grid.Row="5" Grid.Column="2" HeightRequest="60" CornerRadius="30" 
-                        BackgroundColor="#FDFFD0" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Fried 😵"/>
+                        BackgroundColor="#DAA520" TextColor="Black" Command="{Binding SelectEmotionCommand}" CommandParameter="Fried 😵"/>
             </Grid>
 
             <!-- Submit Button -->
-            <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" BackgroundColor="White" TextColor="Black"
-                    Command="{Binding SubmitCommand}" Margin="0,20"/>
+            <Button Text="SUBMIT" CornerRadius="30" HeightRequest="60" BackgroundColor="Brown" TextColor="White"
+                    Command="{Binding SubmitMoodCommand}" Margin="0,20"/>
 
         </VerticalStackLayout>
     </ScrollView>

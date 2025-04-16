@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Firebase.Auth;
 
 
 namespace MIND_LIFT.Services
@@ -65,6 +66,13 @@ namespace MIND_LIFT.Services
             }
 
             throw new Exception($"Login failed: {responseString}");
+        }
+
+        // New Firebase Auth SDK method
+        public async Task<FirebaseAuthLink> SignInWithEmailAndPasswordAsync(string email, string password)
+        {
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
+            return await authProvider.SignInWithEmailAndPasswordAsync(email, password);
         }
     }
 }
