@@ -35,7 +35,7 @@
                ClearButtonVisibility="WhileEditing" />
 
         <Button Text="Login"
-                Command="{Binding LoginCommand}" />
+                Command="{Binding LoginCommand}" />   
 
         <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
 
@@ -44,7 +44,7 @@
            VerticalTextAlignment="Center" />
 
         <Button Text="Signup" 
-            Command="{Binding GoToSignUpCommand}" 
+            Command="{Binding GoToSignupCommand}" 
             FontSize="14" 
             BackgroundColor="Transparent" 
             TextColor="Blue" 
