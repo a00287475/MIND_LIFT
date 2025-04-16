@@ -15,7 +15,7 @@ namespace MIND_LIFT.ViewModel
         [ObservableProperty]
         private string password;
 
-        [RelayCommand]
+
         private async Task LoginAsync()
         {
             if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
