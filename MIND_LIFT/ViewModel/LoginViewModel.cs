@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MIND_LIFT.Services;
 
@@ -16,15 +15,7 @@ namespace MIND_LIFT.ViewModel
         [ObservableProperty]
         private string password;
 
-        public ICommand LoginCommand { get; }
-        public ICommand GoToSignUpCommand { get; }
-
-        public LoginViewModel()
-        {
-            LoginCommand = new AsyncRelayCommand(LoginAsync);
-            GoToSignUpCommand = new AsyncRelayCommand(NavigateToSignup);
-        }
-
+        [RelayCommand]
         private async Task LoginAsync()
         {
             if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
@@ -35,11 +26,8 @@ namespace MIND_LIFT.ViewModel
 
             try
             {
-                //string token = await _authService.LoginAsync(Email, Password);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
                 await Shell.Current.GoToAsync("//DashboardPage");
-
-                //await _firestoreService.AddMoodEntryAsync(token, "user123", "Happy", "Had a great therapy session!");
             }
             catch (Exception ex)
             {
@@ -47,9 +35,10 @@ namespace MIND_LIFT.ViewModel
             }
         }
 
-        private async Task NavigateToSignup()
+        [RelayCommand]
+        private async Task GoToSignup()
         {
-            await Shell.Current.GoToAsync("//SignpPage"); // Adjust route if needed
+            await Shell.Current.GoToAsync("//SignupPage"); // Fixed typo
         }
     }
 }
