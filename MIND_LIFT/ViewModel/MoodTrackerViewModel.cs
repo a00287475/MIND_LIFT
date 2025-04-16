@@ -52,12 +52,47 @@ namespace MIND_LIFT.ViewModel
                     StatusMessage = "You can select up to 5 emotions only.";
                 }
             };
+
+            _ = LoadIdTokenAsync(); // Load token on ViewModel init
         }
 
-        public void SetUserCredentials(string userId, string idToken)
+        private async Task LoadIdTokenAsync()
         {
-            UserId = userId;
-            IdToken = idToken;
+            try
+            {
+                var token = await SecureStorage.GetAsync("idToken");
+                if (!string.IsNullOrWhiteSpace(token))
+                {
+                    IdToken = token;
+                    UserId = await _firestoreService.GetUserIdFromTokenAsync(token);
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Failed to retrieve user info: {ex.Message}";
+            }
+        }
+
+        [RelayCommand]
+        private void SelectEmotion(string emotion)
+        {
+            if (SelectedEmotions.Contains(emotion))
+            {
+                SelectedEmotions.Remove(emotion);
+                StatusMessage = $"{emotion} removed.";
+            }
+            else
+            {
+                if (SelectedEmotions.Count >= 5)
+                {
+                    StatusMessage = "You can select up to 5 emotions only.";
+                    Shell.Current.DisplayAlert("Limit Reached", "You can only select up to 5 emotions.", "OK");
+                    return;
+                }
+
+                SelectedEmotions.Add(emotion);
+                StatusMessage = $"{emotion} added.";
+            }
         }
 
         [RelayCommand]
@@ -72,10 +107,23 @@ namespace MIND_LIFT.ViewModel
                 IsBusy = true;
                 StatusMessage = "Submitting mood...";
 
-                if (string.IsNullOrWhiteSpace(UserId) || string.IsNullOrWhiteSpace(IdToken))
+                //if (string.IsNullOrWhiteSpace(IdToken))
+                //{
+                //    StatusMessage = "User not authenticated.";
+                //    await Shell.Current.DisplayAlert("Error", "You must be logged in to submit your mood.", "OK");
+                //    return;
+                //}
+
+                // Ensure UserId is fetched if not already
+                if (string.IsNullOrWhiteSpace(UserId))
                 {
-                    StatusMessage = "User not authenticated.";
-                    await Shell.Current.DisplayAlert("Error", "You must be logged in to submit your mood.", "OK");
+                    UserId = await _firestoreService.GetUserIdFromTokenAsync(IdToken);
+                }
+
+                if (string.IsNullOrWhiteSpace(UserId))
+                {
+                    StatusMessage = "Could not retrieve user ID.";
+                    await Shell.Current.DisplayAlert("Error", "Failed to get user ID from token.", "OK");
                     return;
                 }
 

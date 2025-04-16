@@ -15,6 +15,29 @@ namespace MIND_LIFT.Services
     {
         private readonly HttpClient _httpClient = new();
         private const string ProjectId = "mindlift-1f06a"; // Replace this!
+        private const string FirebaseApiKey = "AIzaSyCiR3Tm4xJ1FJTzksFWAasjlYRpaRCbLR8";
+
+        public async Task<string> GetUserIdFromTokenAsync(string idToken)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post,
+                $"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={FirebaseApiKey}");
+
+            var body = new { idToken = idToken };
+            var json = JsonSerializer.Serialize(body);
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            var responseText = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Failed to get user info: {responseText}");
+            }
+
+            using var doc = JsonDocument.Parse(responseText);
+            var userId = doc.RootElement.GetProperty("users")[0].GetProperty("localId").GetString();
+            return userId;
+        }
 
         public async Task AddMoodEntryAsync(string idToken, MoodEntry entry)
         {
@@ -36,6 +59,9 @@ namespace MIND_LIFT.Services
                     notes = new { stringValue = entry.Notes ?? string.Empty }
                 }
             };
+
+
+
 
             var json = JsonSerializer.Serialize(document);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

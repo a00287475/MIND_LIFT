@@ -26,7 +26,14 @@ namespace MIND_LIFT.ViewModel
 
             try
             {
-                await _authService.SignInWithEmailAndPasswordAsync(Email, Password);
+                var authLink =  await _authService.SignInWithEmailAndPasswordAsync(Email, Password);
+
+                var idToken = authLink.FirebaseToken;
+                var userId = authLink.User.LocalId;
+
+                // ✅ Save token and user ID securely
+                await SecureStorage.SetAsync("idToken", idToken);
+                await SecureStorage.SetAsync("userId", userId);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
                 await Shell.Current.GoToAsync("//DashboardPage");
             }
