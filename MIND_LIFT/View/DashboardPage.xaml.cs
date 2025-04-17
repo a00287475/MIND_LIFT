@@ -1,18 +1,14 @@
 using MIND_LIFT.ViewModel;
 using MIND_LIFT.Services;
 
-
-namespace MIND_LIFT.View;
-
-public partial class DashboardPage : ContentPage
+namespace MIND_LIFT.View
 {
-    public DashboardPage(DashboardViewModel viewModel) 
+    public partial class DashboardPage : ContentPage
     {
-
-        if (viewModel == null)
-            throw new ArgumentNullException(nameof(viewModel));
-
-        InitializeComponent();
-        BindingContext = new DashboardViewModel(new FirestoreService());
+        public DashboardPage(DashboardViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = viewModel; // Use the injected ViewModel
+        }
     }
 }
