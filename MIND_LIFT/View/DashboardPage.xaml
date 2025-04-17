@@ -17,6 +17,25 @@
             <Button Text="Start Meditation" Command="{Binding NavigateToMeditationCommand}" />
             <Button Text="View Journal" Command="{Binding NavigateToJournalCommand}" />
 
+            <!-- Mood Entries List -->
+            <Label Text="Your Mood History:" FontSize="18" FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding MoodEntries}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BackgroundColor="#f0f0f0">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Date, StringFormat='Date: {0:MMM dd, yyyy}'}"/>
+                                <Label Text="{Binding MoodScore, StringFormat='Mood: {0}/10'}"/>
+                                <Label Text="{Binding Emotions, Converter={StaticResource ListToStringConverter}}"/>
+                                <Label Text="{Binding Notes}" 
+                                       IsVisible="{Binding Notes, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -17,6 +17,59 @@ namespace MIND_LIFT.Services
         private const string ProjectId = "mindlift-1f06a"; // Replace this!
         private const string FirebaseApiKey = "AIzaSyCiR3Tm4xJ1FJTzksFWAasjlYRpaRCbLR8";
 
+        public async Task<List<MoodEntry>> GetAllMoodEntriesAsync(string userId, string idToken)
+        {
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+                var response = await _httpClient.GetAsync(
+                    $"https://firestore.googleapis.com/v1/projects/{ProjectId}/databases/(default)/documents/users/{userId}/mood_entries");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorText = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Failed to get mood entries: {errorText}");
+                }
+
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                return ParseMoodEntries(jsonResponse);
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the error appropriately
+                throw new Exception("Error retrieving mood entries", ex);
+            }
+        }
+
+        private List<MoodEntry> ParseMoodEntries(string jsonResponse)
+        {
+            using var doc = JsonDocument.Parse(jsonResponse);
+
+            return doc.RootElement.GetProperty("documents")
+                .EnumerateArray()
+                .Select(document =>
+                {
+                    var fields = document.GetProperty("fields");
+                    return new MoodEntry
+                    {
+                        EntryId = fields.GetProperty("entryId").GetProperty("stringValue").GetString(),
+                        UserId = fields.GetProperty("userId").GetProperty("stringValue").GetString(),
+                        Date = DateTime.Parse(fields.GetProperty("date").GetProperty("timestampValue").GetString()),
+                        MoodScore = int.Parse(fields.GetProperty("moodScore").GetProperty("integerValue").GetString()),
+                        Emotions = fields.GetProperty("emotions").GetProperty("arrayValue")
+                                       .GetProperty("values")
+                                       .EnumerateArray()
+                                       .Select(e => e.GetProperty("stringValue").GetString())
+                                       .ToList(),
+                        Notes = fields.GetProperty("notes").GetProperty("stringValue").GetString()
+                    };
+                })
+                .OrderByDescending(e => e.Date)
+                .ToList();
+        }
+
         public async Task<string> GetUserIdFromTokenAsync(string idToken)
         {
             var request = new HttpRequestMessage(HttpMethod.Post,

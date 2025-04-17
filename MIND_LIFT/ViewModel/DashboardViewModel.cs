@@ -1,14 +1,8 @@
 ﻿using MIND_LIFT.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using MIND_LIFT.Services;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MIND_LIFT.Services;
-
 
 namespace MIND_LIFT.ViewModel;
 
@@ -19,6 +13,11 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty]
     private Affirmation dailyAffirmation;
 
+    [ObservableProperty]
+    private ObservableCollection<MoodEntry> moodEntries = new();
+
+    [ObservableProperty]
+    private bool isLoading;
 
     public DashboardViewModel(FirestoreService firestoreService)
     {
@@ -35,6 +34,32 @@ public partial class DashboardViewModel : ObservableObject
         await Shell.Current.GoToAsync("MoodTrackerPage");
     }
 
+    [RelayCommand]
+    private async Task LoadMoodEntries()
+    {
+        IsLoading = true;
+        try
+        {
+            string userId = "YOUR_USER_ID"; // Get from your auth system
+            string idToken = "YOUR_AUTH_TOKEN"; // Get from your auth system
+
+            var entries = await _firestoreService.GetAllMoodEntriesAsync(userId, idToken);
+
+            MoodEntries.Clear();
+            foreach (var entry in entries)
+            {
+                MoodEntries.Add(entry);
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
 
     [RelayCommand]
     private async Task NavigateToMeditation()
@@ -46,34 +71,5 @@ public partial class DashboardViewModel : ObservableObject
     private async Task NavigateToJournal()
     {
         await Shell.Current.GoToAsync("JournalPage");
-    }
-
-    [RelayCommand]
-    private async Task DisplayAllMoodEntries()
-    {
-        
-        try
-        {
-            // Replace these with actual values from your auth system
-            string userId = "YOUR_USER_ID";
-            string idToken = "YOUR_AUTH_TOKEN";
-
-            var entries = await _firestoreService.GetMoodEntriesAsync(userId, idToken);
-
-            Console.WriteLine("\n==== ALL MOOD ENTRIES ====");
-            foreach (var entry in entries)
-            {
-                Console.WriteLine($"\nDate: {entry.Date}");
-                Console.WriteLine($"Mood Score: {entry.MoodScore}/10");
-                Console.WriteLine($"Emotions: {string.Join(", ", entry.Emotions)}");
-                Console.WriteLine($"Notes: {entry.Notes ?? "None"}");
-            }
-            Console.WriteLine($"\nTotal entries: {entries.Count}");
-            Console.WriteLine("=========================\n");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error displaying entries: {ex.Message}");
-        }
     }
 }
