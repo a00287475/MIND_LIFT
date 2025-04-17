@@ -148,6 +148,7 @@ namespace MIND_LIFT.ViewModel
 
                 StatusMessage = "Mood entry saved successfully!";
                 await Shell.Current.DisplayAlert("Success", "Your mood has been saved.", "OK");
+                await Shell.Current.GoToAsync("//DashboardPage");
 
                 // Reset form
                 Notes = string.Empty;
