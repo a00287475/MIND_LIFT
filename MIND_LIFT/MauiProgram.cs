@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MIND_LIFT.Services;
 using MIND_LIFT.View;
+using MIND_LIFT.ViewModel;
 
 namespace MIND_LIFT
 {
@@ -21,6 +23,8 @@ namespace MIND_LIFT
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<FirestoreService>();
+            builder.Services.AddSingleton<DashboardViewModel>();
 
 #endif
 

@@ -11,7 +11,7 @@ namespace MIND_LIFT.Services
 
 
 {
-    class FirestoreService
+   public class FirestoreService
     {
         private readonly HttpClient _httpClient = new();
         private const string ProjectId = "mindlift-1f06a"; // Replace this!
@@ -78,6 +78,47 @@ namespace MIND_LIFT.Services
                 var responseText = await response.Content.ReadAsStringAsync();
                 throw new Exception($"Failed to add mood entry: {responseText}");
             }
+        }
+
+        public async Task<List<MoodEntry>> GetMoodEntriesAsync(string userId, string idToken, int limit = 30)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.GetAsync(
+                $"https://firestore.googleapis.com/v1/projects/{ProjectId}/databases/(default)/documents/users/{userId}/mood_entries" +
+                $"?orderBy=date&pageSize={limit}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Failed to get mood entries: {errorText}");
+            }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(jsonResponse);
+
+            return doc.RootElement.GetProperty("documents")
+                .EnumerateArray()
+                .Select(document =>
+                {
+                    var fields = document.GetProperty("fields");
+                    return new MoodEntry
+                    {
+                        EntryId = fields.GetProperty("entryId").GetProperty("stringValue").GetString(),
+                        UserId = fields.GetProperty("userId").GetProperty("stringValue").GetString(),
+                        Date = DateTime.Parse(fields.GetProperty("date").GetProperty("timestampValue").GetString()),
+                        MoodScore = int.Parse(fields.GetProperty("moodScore").GetProperty("integerValue").GetString()),
+                        Emotions = fields.GetProperty("emotions").GetProperty("arrayValue")
+                                       .GetProperty("values")
+                                       .EnumerateArray()
+                                       .Select(e => e.GetProperty("stringValue").GetString())
+                                       .ToList(),
+                        Notes = fields.GetProperty("notes").GetProperty("stringValue").GetString()
+                    };
+                })
+                .OrderByDescending(e => e.Date)
+                .ToList();
         }
 
     }

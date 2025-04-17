@@ -107,14 +107,7 @@ namespace MIND_LIFT.ViewModel
                 IsBusy = true;
                 StatusMessage = "Submitting mood...";
 
-                //if (string.IsNullOrWhiteSpace(IdToken))
-                //{
-                //    StatusMessage = "User not authenticated.";
-                //    await Shell.Current.DisplayAlert("Error", "You must be logged in to submit your mood.", "OK");
-                //    return;
-                //}
-
-                // Ensure UserId is fetched if not already
+             
                 if (string.IsNullOrWhiteSpace(UserId))
                 {
                     UserId = await _firestoreService.GetUserIdFromTokenAsync(IdToken);
@@ -148,6 +141,7 @@ namespace MIND_LIFT.ViewModel
 
                 StatusMessage = "Mood entry saved successfully!";
                 await Shell.Current.DisplayAlert("Success", "Your mood has been saved.", "OK");
+                await Shell.Current.GoToAsync("//DashboardPage");
 
                 // Reset form
                 Notes = string.Empty;
