@@ -35,7 +35,7 @@ namespace MIND_LIFT.ViewModel
                 await SecureStorage.SetAsync("idToken", idToken);
                 await SecureStorage.SetAsync("userId", userId);
                 await Shell.Current.DisplayAlert("Success", "Logged in successfully!", "OK");
-                await Shell.Current.GoToAsync("//DashboardPage");
+                await Shell.Current.GoToAsync($"//DashboardPage?userId={userId}&idToken={idToken}");
             }
             catch (Exception ex)
             {

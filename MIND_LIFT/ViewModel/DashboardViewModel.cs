@@ -3,12 +3,23 @@ using MIND_LIFT.Services;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
 
 namespace MIND_LIFT.ViewModel;
 
+[QueryProperty(nameof(UserId), "userId")]
+[QueryProperty(nameof(IdToken), "idToken")]
 public partial class DashboardViewModel : ObservableObject
 {
+
+
     private readonly FirestoreService _firestoreService;
+
+    [ObservableProperty]
+    private string userId;
+
+    [ObservableProperty]
+    private string idToken;
 
     [ObservableProperty]
     private Affirmation dailyAffirmation;
@@ -22,43 +33,34 @@ public partial class DashboardViewModel : ObservableObject
     public DashboardViewModel(FirestoreService firestoreService)
     {
         _firestoreService = firestoreService;
+
         DailyAffirmation = new Affirmation
         {
             Message = "You are strong, capable, and resilient."
         };
-    }
-
-    [RelayCommand]
-    private async Task GotoMoodTracker()
-    {
-        await Shell.Current.GoToAsync("MoodTrackerPage");
+        _ = LoadMoodEntries();
     }
 
     [RelayCommand]
     private async Task LoadMoodEntries()
     {
         IsLoading = true;
-        try
-        {
-            string userId = "YOUR_USER_ID"; // Get from your auth system
-            string idToken = "YOUR_AUTH_TOKEN"; // Get from your auth system
+        await Shell.Current.DisplayAlert("Credentials", $"UserId: {UserId}\nToken: {IdToken}", "OK");
 
-            var entries = await _firestoreService.GetAllMoodEntriesAsync(userId, idToken);
+        if (string.IsNullOrWhiteSpace(UserId) || string.IsNullOrWhiteSpace(IdToken))
+        {
+            await Shell.Current.DisplayAlert("Missing Credentials",
+                $"UserId: {UserId ?? "null"}\nToken: {IdToken ?? "null"}", "OK");
+            return;
+        }
+    }
 
-            MoodEntries.Clear();
-            foreach (var entry in entries)
-            {
-                MoodEntries.Add(entry);
-            }
-        }
-        catch (Exception ex)
-        {
-            await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
-        }
-        finally
-        {
-            IsLoading = false;
-        }
+   
+
+    [RelayCommand]
+    private async Task GotoMoodTracker()
+    {
+        await Shell.Current.GoToAsync("MoodTrackerPage");
     }
 
     [RelayCommand]
@@ -72,4 +74,8 @@ public partial class DashboardViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("JournalPage");
     }
+
+
 }
+
+
